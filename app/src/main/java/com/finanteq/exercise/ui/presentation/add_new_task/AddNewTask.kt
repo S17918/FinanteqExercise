@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.finanteq.exercise.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddNewTask : Fragment() {
 
-    private lateinit var viewModel: AddNewTaskViewModel
+    private val viewModel: AddNewTaskViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_new_task_fragment, container, false)
@@ -18,7 +19,6 @@ class AddNewTask : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddNewTaskViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

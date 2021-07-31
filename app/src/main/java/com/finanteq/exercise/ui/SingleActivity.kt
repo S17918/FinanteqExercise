@@ -7,7 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.finanteq.exercise.R
-import com.finanteq.exercise.di.RepositoryModule
+import com.finanteq.exercise.di.TaskDetailsModule
+import com.finanteq.exercise.di.TaskListModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,8 +22,8 @@ class SingleActivity : AppCompatActivity() {
             androidLogger()
             androidContext(this@SingleActivity)
             modules(
-                RepositoryModule.taskListViewModelModule,
-                RepositoryModule.taskDetailsViewModelModule
+                TaskListModule.taskListViewModelModule,
+                TaskDetailsModule.taskDetailsViewModelModule
             )
         }
 

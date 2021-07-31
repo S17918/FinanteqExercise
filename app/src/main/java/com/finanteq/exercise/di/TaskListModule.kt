@@ -8,14 +8,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-object RepositoryModule {
+object TaskListModule {
     val taskListViewModelModule: Module = module {
         single<TaskRepository> { TaskRepositoryImpl() }
         viewModel { TaskListViewModel(get()) }
-    }
-
-    val taskDetailsViewModelModule: Module = module {
-        single<TaskRepository> { TaskRepositoryImpl() }
-        viewModel { TaskDetailsViewModel(get()) }
     }
 }
