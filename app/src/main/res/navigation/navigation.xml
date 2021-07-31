@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/taskListFragment">
 
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.finanteq.exercise.ui.presentation.task_list.TaskListFragment"
+        android:label="Your Tasks"
+        tools:layout="@layout/task_list_fragment" >
+        <action
+            android:id="@+id/showTask"
+            app:destination="@id/taskDetailsFragment" />
+        <action
+            android:id="@+id/addTask"
+            app:destination="@id/addNewTask" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailsFragment"
+        android:name="com.finanteq.exercise.ui.presentation.task_details.TaskDetailsFragment"
+        android:label="Task Details"
+        tools:layout="@layout/task_details_fragment" />
+    <fragment
+        android:id="@+id/addNewTask"
+        android:name="com.finanteq.exercise.ui.presentation.add_new_task.AddNewTask"
+        android:label="Add Task"
+        tools:layout="@layout/add_new_task_fragment" />
 </navigation>
