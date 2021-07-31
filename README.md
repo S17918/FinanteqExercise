@@ -1,0 +1,2 @@
+# FinanteqExercise
+Finanteq exercise
