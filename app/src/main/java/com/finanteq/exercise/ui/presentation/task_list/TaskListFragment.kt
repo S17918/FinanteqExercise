@@ -1,28 +1,27 @@
 package com.finanteq.exercise.ui.presentation.task_list
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.finanteq.exercise.R
 import com.finanteq.exercise.adapters.TaskRecyclerAdapter
 import com.finanteq.exercise.models.Task
 import com.finanteq.exercise.util.OnTaskClickListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class TaskListFragment : Fragment(), OnTaskClickListener {
 
-    private lateinit var viewModel: TaskListViewModel
+    private val viewModel: TaskListViewModel by viewModel()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TaskRecyclerAdapter
+    private lateinit var addButton: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.task_list_fragment, container, false)
@@ -30,9 +29,9 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TaskListViewModel::class.java)
 
         initRecyclerView()
+        initFloatingButton()
         adapter.setTasks(initTestData())
 
     }
@@ -42,6 +41,13 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
         adapter = TaskRecyclerAdapter(this)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+    }
+
+    private fun initFloatingButton(){
+        addButton = requireView().findViewById(R.id.addTaskButton)
+        addButton.setOnClickListener {
+            findNavController().navigate(R.id.addTaskAction)
+        }
     }
 
     private fun initTestData(): List<Task> {
@@ -59,7 +65,7 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
         val task: Task = initTestData()[pos]
         val bundle: Bundle = Bundle()
         bundle.putParcelable("task", task)
-        findNavController().navigate(R.id.showTask, bundle)
+        findNavController().navigate(R.id.showTaskAction, bundle)
     }
 
 }

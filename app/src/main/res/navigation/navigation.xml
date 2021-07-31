@@ -11,10 +11,10 @@
         android:label="Your Tasks"
         tools:layout="@layout/task_list_fragment" >
         <action
-            android:id="@+id/showTask"
+            android:id="@+id/showTaskAction"
             app:destination="@id/taskDetailsFragment" />
         <action
-            android:id="@+id/addTask"
+            android:id="@+id/addTaskAction"
             app:destination="@id/addNewTask" />
     </fragment>
     <fragment
