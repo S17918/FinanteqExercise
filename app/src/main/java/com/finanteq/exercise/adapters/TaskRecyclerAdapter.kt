@@ -10,6 +10,9 @@ import com.finanteq.exercise.models.Task
 import com.finanteq.exercise.models.Task.Companion.CATEGORY_1
 import com.finanteq.exercise.models.Task.Companion.CATEGORY_2
 import com.finanteq.exercise.models.Task.Companion.CATEGORY_3
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_4
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_5
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_6
 import com.finanteq.exercise.util.OnTaskClickListener
 import java.text.SimpleDateFormat
 
@@ -37,7 +40,7 @@ class TaskRecyclerAdapter(private val clickListener: OnTaskClickListener) : Recy
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView : View, val clickListener: OnTaskClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class ViewHolder(itemView : View, private val clickListener: OnTaskClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private var taskName: TextView? = null
         private var taskCategory: TextView? = null
@@ -70,6 +73,15 @@ class TaskRecyclerAdapter(private val clickListener: OnTaskClickListener) : Recy
                 }
                 CATEGORY_3 -> {
                     taskCategory?.setBackgroundResource(R.color.category_3)
+                }
+                CATEGORY_4 -> {
+                    taskCategory?.setBackgroundResource(R.color.category_4)
+                }
+                CATEGORY_5 -> {
+                    taskCategory?.setBackgroundResource(R.color.category_5)
+                }
+                CATEGORY_6 -> {
+                    taskCategory?.setBackgroundResource(R.color.category_6)
                 }
             }
         }

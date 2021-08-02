@@ -9,8 +9,4 @@ class TaskListViewModel(private val repository: TaskRepository) : ViewModel() {
     fun getTasks(): LiveData<List<Task>> {
         return repository.getTasks()
     }
-
-    fun addTask() {
-        TODO("Not yet implemented")
-    }
 }

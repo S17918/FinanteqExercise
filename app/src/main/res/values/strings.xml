@@ -9,6 +9,9 @@
     <string-array name="add_category_content">
         <item>Praca</item>
         <item>Zakupy</item>
+        <item>Dom</item>
+        <item>Szkoła</item>
+        <item>Samochód</item>
         <item>Inne</item>
     </string-array>
 </resources>

@@ -7,11 +7,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.finanteq.exercise.R
-import com.finanteq.exercise.di.TaskDetailsModule
-import com.finanteq.exercise.di.TaskListModule
+import com.finanteq.exercise.di.Modules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 class SingleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +22,10 @@ class SingleActivity : AppCompatActivity() {
             androidLogger()
             androidContext(this@SingleActivity)
             modules(
-                TaskListModule.taskListViewModelModule,
-                TaskDetailsModule.taskDetailsViewModelModule
+                Modules.taskListModule,
+                Modules.addTaskModule,
+                Modules.taskDetailsModule,
+                Modules.repositoryModule
             )
         }
 
@@ -31,5 +33,10 @@ class SingleActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         findViewById<Toolbar>(R.id.toolbar)
             .setupWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopKoin()
     }
 }

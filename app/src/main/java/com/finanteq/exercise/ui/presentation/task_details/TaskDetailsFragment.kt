@@ -20,6 +20,8 @@ class TaskDetailsFragment : Fragment() {
     private lateinit var taskName: TextView
     private lateinit var taskCategory: TextView
     private lateinit var taskDate: TextView
+    private var pos: Int = 0
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.task_details_fragment, container, false)
@@ -27,14 +29,9 @@ class TaskDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getBundleData()
+        pos = arguments?.getInt("pos")!!
         initTextViews()
         setTextViews()
-    }
-
-    private fun getBundleData(){
-        val task: Task = arguments?.getParcelable<Task>("task")!!
-        viewModel.setTask(task)
     }
 
     private fun initTextViews(){
@@ -44,14 +41,14 @@ class TaskDetailsFragment : Fragment() {
     }
 
     private fun setTextViews(){
-        viewModel.getTask().observe(viewLifecycleOwner){
+        viewModel.getTasks().observe(viewLifecycleOwner){
             val format: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
-            taskName.text = it.task_name
-            taskDate.text = format.format(it.task_date)
+            taskName.text = it[pos].task_name
+            taskDate.text = format.format(it[pos].task_date)
             taskDate.setBackgroundResource(R.color.date)
-            taskCategory.text = it.task_category
+            taskCategory.text = it[pos].task_category
 
-            when (it.task_category) {
+            when (it[pos].task_category) {
                 CATEGORY_1 -> {
                     taskCategory.setBackgroundResource(R.color.category_1)
                 }
@@ -60,6 +57,15 @@ class TaskDetailsFragment : Fragment() {
                 }
                 CATEGORY_3 -> {
                     taskCategory.setBackgroundResource(R.color.category_3)
+                }
+                Task.CATEGORY_4 -> {
+                    taskCategory.setBackgroundResource(R.color.category_4)
+                }
+                Task.CATEGORY_5 -> {
+                    taskCategory.setBackgroundResource(R.color.category_5)
+                }
+                Task.CATEGORY_6 -> {
+                    taskCategory.setBackgroundResource(R.color.category_6)
                 }
             }
 

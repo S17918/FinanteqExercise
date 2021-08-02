@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,8 @@ import com.finanteq.exercise.adapters.TaskRecyclerAdapter
 import com.finanteq.exercise.models.Task
 import com.finanteq.exercise.util.OnTaskClickListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -29,11 +32,15 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initRecyclerView()
         initFloatingButton()
-        adapter.setTasks(initTestData())
+        subscribeObservers()
+    }
 
+    private fun subscribeObservers(){
+        viewModel.getTasks().observe(viewLifecycleOwner){
+            adapter.setTasks(it)
+        }
     }
 
     private fun initRecyclerView(){
@@ -50,21 +57,9 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
         }
     }
 
-    private fun initTestData(): List<Task> {
-        val date: Date = Calendar.getInstance().time
-        val task1: Task = Task("Zadanie numer 1", date, "Praca")
-        val task2: Task = Task("Zadanie numer 2", date, "Zakupy")
-        val task3: Task = Task("Zadanie numer 3", date, "Inne")
-        val task4: Task = Task("Zadanie numer 4", date, "Praca")
-        val task5: Task = Task("Zadanie numer 5", date, "Zakupy")
-
-        return listOf(task1, task2, task3, task4, task5)
-    }
-
     override fun onTaskClick(pos: Int) {
-        val task: Task = initTestData()[pos]
         val bundle: Bundle = Bundle()
-        bundle.putParcelable("task", task)
+        bundle.putInt("pos", pos)
         findNavController().navigate(R.id.showTaskAction, bundle)
     }
 

@@ -5,5 +5,5 @@ import com.finanteq.exercise.models.Task
 
 interface TaskRepository {
     fun getTasks(): LiveData<List<Task>>
-    fun addTask()
+    fun insertTask(task: Task)
 }

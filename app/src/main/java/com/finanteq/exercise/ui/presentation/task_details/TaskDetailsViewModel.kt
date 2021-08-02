@@ -8,13 +8,7 @@ import com.finanteq.exercise.repositories.TaskRepository
 
 class TaskDetailsViewModel(private val repository: TaskRepository) : ViewModel() {
 
-    private var task: MutableLiveData<Task> = MutableLiveData()
-
-    fun setTask(task: Task){
-        this.task.value = task
-    }
-
-    fun getTask(): LiveData<Task> {
-        return task
+    fun getTasks(): LiveData<List<Task>> {
+        return repository.getTasks()
     }
 }

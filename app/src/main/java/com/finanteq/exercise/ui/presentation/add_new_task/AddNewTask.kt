@@ -1,19 +1,22 @@
 package com.finanteq.exercise.ui.presentation.add_new_task
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.finanteq.exercise.R
+import com.finanteq.exercise.models.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,17 +43,48 @@ class AddNewTask : Fragment() {
 
         taskDate.setOnClickListener{ showDateDialog(taskDate) }
         cancelButton.setOnClickListener{ findNavController().popBackStack(R.id.taskListFragment, false) }
+        addButton.setOnClickListener{
+            if(taskName.text.isEmpty() || taskDate.text.isEmpty() || taskCategory.selectedItem.toString().isEmpty()){
+                callError()
+            }else{
+                insertData()
+            }
+        }
 
+    }
+
+    private fun callError() {
+        val alert = AlertDialog.Builder(context, R.style.DialogStyle)
+        alert.setTitle("Alert !")
+        alert.setMessage("Error occured when adding task to database. Do you want to try again ?")
+        alert.setNegativeButton("No") { dialog, _ ->
+            findNavController().popBackStack(R.id.taskListFragment, false)
+            dialog.dismiss()
+        }
+        alert.setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alert.show()
+    }
+
+    private fun insertData() {
+        lifecycleScope.launch(Dispatchers.IO){
+            val date: Date = SimpleDateFormat("yyyy-MM-dd HH:mm").parse(taskDate.text.toString())
+            val task: Task = Task(taskName.text.toString(), date, taskCategory.selectedItem.toString())
+            viewModel.insertTask(task)
+        }
+        findNavController().popBackStack(R.id.taskListFragment, false)
+        Toast.makeText(context, "Task added successfully!", Toast.LENGTH_LONG).show()
     }
 
     private fun showDateDialog(taskDate: EditText) {
         val calendar: Calendar = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
 
