@@ -1,15 +1,16 @@
 package com.finanteq.exercise.ui.presentation.task_details
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import com.finanteq.exercise.R
 import com.finanteq.exercise.models.Task
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_1
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_2
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_3
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 
@@ -51,17 +52,14 @@ class TaskDetailsFragment : Fragment() {
             taskCategory.text = it.task_category
 
             when (it.task_category) {
-                "Category 1" -> {
+                CATEGORY_1 -> {
                     taskCategory.setBackgroundResource(R.color.category_1)
                 }
-                "Category 2" -> {
+                CATEGORY_2 -> {
                     taskCategory.setBackgroundResource(R.color.category_2)
                 }
-                "Category 3" -> {
+                CATEGORY_3 -> {
                     taskCategory.setBackgroundResource(R.color.category_3)
-                }
-                "Category 4" -> {
-                    taskCategory.setBackgroundResource(R.color.category_4)
                 }
             }
 

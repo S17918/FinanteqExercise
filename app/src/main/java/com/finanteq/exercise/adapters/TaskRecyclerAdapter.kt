@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.finanteq.exercise.R
 import com.finanteq.exercise.models.Task
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_1
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_2
+import com.finanteq.exercise.models.Task.Companion.CATEGORY_3
 import com.finanteq.exercise.util.OnTaskClickListener
 import java.text.SimpleDateFormat
 
@@ -59,17 +62,14 @@ class TaskRecyclerAdapter(private val clickListener: OnTaskClickListener) : Recy
             taskDate?.setBackgroundResource(R.color.date)
 
             when (task.task_category) {
-                "Category 1" -> {
+                CATEGORY_1 -> {
                     taskCategory?.setBackgroundResource(R.color.category_1)
                 }
-                "Category 2" -> {
+                CATEGORY_2 -> {
                     taskCategory?.setBackgroundResource(R.color.category_2)
                 }
-                "Category 3" -> {
+                CATEGORY_3 -> {
                     taskCategory?.setBackgroundResource(R.color.category_3)
-                }
-                "Category 4" -> {
-                    taskCategory?.setBackgroundResource(R.color.category_4)
                 }
             }
         }

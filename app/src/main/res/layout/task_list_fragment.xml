@@ -11,6 +11,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
+
+        <TextView
+            android:textSize="18sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginHorizontal="20sp"
+            android:fontFamily="@font/bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/error_message"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/task_list"
             android:layout_width="match_parent"

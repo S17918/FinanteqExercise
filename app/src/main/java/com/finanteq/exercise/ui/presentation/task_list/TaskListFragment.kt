@@ -52,11 +52,11 @@ class TaskListFragment : Fragment(), OnTaskClickListener {
 
     private fun initTestData(): List<Task> {
         val date: Date = Calendar.getInstance().time
-        val task1: Task = Task("Zadanie numer 1", date, "Category 1")
-        val task2: Task = Task("Zadanie numer 2", date, "Category 2")
-        val task3: Task = Task("Zadanie numer 3", date, "Category 3")
-        val task4: Task = Task("Zadanie numer 4", date, "Category 4")
-        val task5: Task = Task("Zadanie numer 5", date, "Category 2")
+        val task1: Task = Task("Zadanie numer 1", date, "Praca")
+        val task2: Task = Task("Zadanie numer 2", date, "Zakupy")
+        val task3: Task = Task("Zadanie numer 3", date, "Inne")
+        val task4: Task = Task("Zadanie numer 4", date, "Praca")
+        val task5: Task = Task("Zadanie numer 5", date, "Zakupy")
 
         return listOf(task1, task2, task3, task4, task5)
     }

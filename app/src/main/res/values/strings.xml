@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">FinanteqExercise</string>
+    <string name="date_time">Date and time</string>
+    <string name="task_name">Task name</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_message">No tasks available</string>
+
+    <string-array name="add_category_content">
+        <item>Praca</item>
+        <item>Zakupy</item>
+        <item>Inne</item>
+    </string-array>
 </resources>

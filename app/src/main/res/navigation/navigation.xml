@@ -26,5 +26,6 @@
         android:id="@+id/addNewTask"
         android:name="com.finanteq.exercise.ui.presentation.add_new_task.AddNewTask"
         android:label="Add Task"
-        tools:layout="@layout/add_new_task_fragment" />
+        tools:layout="@layout/add_new_task_fragment" >
+    </fragment>
 </navigation>

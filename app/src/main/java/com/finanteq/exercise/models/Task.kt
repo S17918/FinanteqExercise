@@ -10,4 +10,9 @@ data class Task(
     val task_date: Date? = null,
     val task_category: String? = null
 ) : Parcelable {
+    companion object {
+        const val CATEGORY_1 = "Praca"
+        const val CATEGORY_2 = "Zakupy"
+        const val CATEGORY_3 = "Inne"
+    }
 }
